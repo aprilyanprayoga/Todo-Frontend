@@ -1,0 +1,22 @@
+import { Navigate, Route, Routes } from 'react-router-dom';
+import ProtectedRoute from './components/ProtectedRoute';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
+import Dashboard from './pages/Dashboard';
+import NotFound from './pages/NotFound';
+
+export default function App() {
+  return <Routes>
+    <Route path="/login" element={<Login />} />
+    <Route path="/register" element={<Register />} />
+    <Route path="/forgot-password" element={<ForgotPassword />} />
+    <Route path="/reset-password" element={<ResetPassword />} />
+    <Route element={<ProtectedRoute />}>
+      <Route path="/" element={<Dashboard />} />
+    </Route>
+    <Route path="*" element={<NotFound />} />
+    <Route path="/home" element={<Navigate to="/" replace />} />
+  </Routes>;
+}
